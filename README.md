@@ -8,11 +8,10 @@ OpenEBS is a Cloud Native software defined storage solution that enable us to us
 * Completely in userspace making it highly portable.
 * Volumes provisioned through OpenEBS are always containerized and represented as a pod.
 * OpenEBS is a collection Storage Engines.
-    * [Jiva] (./openebs/Jiva/README.md)
+    * [Jiva](./openebs/Jiva/README.md)
     * [cStor](./openebs/cStor/README.md)
-    * [LocalPV-hostpath] (./openebs/LocalPV/hostpath/README.md)
-    * [LocalPV-device] (./openebs/LocalPV/device/README.md)
-
+    * [LocalPV-hostpath](./openebs/LocalPV/hostpath/README.md)
+    * [LocalPV-device](./openebs/LocalPV/device/README.md)
 
 
 ## Engines Comparison   
