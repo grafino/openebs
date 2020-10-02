@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: busybox-hostpath
+  labels:
+    app: busybox-hostpath
+spec:
+  serviceName: busybox-hostpath
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-hostpath
+  template:
+    metadata:
+      labels:
+        app: busybox-hostpath
+    spec:
+      containers:
+      - name: busybox-hostpath
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - sleep
+          - infinity
+        volumeMounts:
+        - name: busybox-hostpath
+          mountPath: /busybox
+  volumeClaimTemplates:
+  - metadata:
+      name: busybox-hostpath
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: local-hostpath-sc
+      resources:
+        requests:
+          storage: 2Gi

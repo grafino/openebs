@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: busybox-device
+  labels:
+    app: busybox-device
+spec:
+  serviceName: busybox-device
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-device
+  template:
+    metadata:
+      labels:
+        app: busybox-device
+    spec:
+      containers:
+      - name: busybox-device
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - sleep
+          - infinity
+        volumeMounts:
+        - name: busybox-device
+          mountPath: /mnt/busybox
+  volumeClaimTemplates:
+  - metadata:
+      name: busybox-device
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: local-device-sc
+      resources:
+        requests:
+          storage: 4Gi

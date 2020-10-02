@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: busyjiva
+  name: busyjiva
+spec:
+  clusterIP: None
+  selector:
+    app: busyjiva
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: busyjiva
+  labels:
+    app: busyjiva
+spec:
+  serviceName: busyjiva
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busyjiva
+  template:
+    metadata:
+      labels:
+        app: busyjiva
+    spec:
+      containers:
+      - name: busyjiva
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+          - sleep
+          - infinity
+        volumeMounts:
+        - name: busyjiva
+          mountPath: /busybox
+  volumeClaimTemplates:
+  - metadata:
+      name: busyjiva
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: openebs-jiva-single-node
+      resources:
+        requests:
+          storage: 2Gi

@@ -1,0 +1,8 @@
+apiVersion: openebs.io/v1alpha1
+kind: StoragePool
+metadata:
+    name: jiva-pool            
+    type: hostdir
+spec:
+    host: k8s-federated-storage-pool-3leoq
+    path: "/mnt/5g"

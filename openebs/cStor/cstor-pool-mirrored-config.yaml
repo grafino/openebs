@@ -1,0 +1,27 @@
+#Use the following YAMLs to create a cStor Storage Pool.
+apiVersion: openebs.io/v1alpha1
+kind: StoragePoolClaim
+metadata:
+  name: cstor-disk-pool-mirrored
+  annotations:
+    cas.openebs.io/config: |
+      - name: PoolResourceRequests
+        value: |-
+            memory: 2Gi
+      - name: PoolResourceLimits
+        value: |-
+            memory: 4Gi
+spec:
+  name: cstor-disk-pool-mirrored
+  type: disk
+  poolSpec:
+    poolType: mirrored
+  blockDevices:
+    blockDeviceList:
+      - blockdevice-14f3a461bdde1cd820dd3a7819e36c54  #Node federated-storage-pool-3lotr
+      - blockdevice-1deee5ebf258da0aa3de3ace59f8fcb7  #Node federated-storage-pool-3lotj
+      - blockdevice-5b449a1be25eb3a27fd8f71815b8a3a7  #Node federated-storage-pool-3lotr
+      - blockdevice-96e849167d30baa806a144d134749220  #Node federated-storage-pool-3lotb
+      - blockdevice-a6615702dd287d47f253d026abfcb235  #Node federated-storage-pool-3lotj
+      - blockdevice-c9a2f5a62a1342918c55425312fc712b  #Node federated-storage-pool-3lotb
+---

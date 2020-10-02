@@ -1,0 +1,14 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: openebs-cstor-sc
+  annotations:
+    openebs.io/cas-type: cstor
+    cas.openebs.io/config: |
+      - name: StoragePoolClaim
+        value: "cstor-disk-pool-striped"
+      - name: ReplicaCount
+        value: "3"
+      - name: VolumeMonitor
+        enabled: "true"
+provisioner: openebs.io/provisioner-iscsi
